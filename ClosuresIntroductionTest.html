@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Clousure introduction Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+				var Ninja = function(){
+
+					var sliceValue;
+
+					this.getSlice = function(){
+						return sliceValue;
+					}
+
+					this.slice = function(){
+						sliceValue = "slice"
+					}
+
+
+				}
+
+				var ninja1 = new Ninja();
+				ninja1.slice();
+				assert(ninja1.getSlice() === "slice", "Can access value using getter: "+ninja1.getSlice());
+				assert(ninja1.sliceValue === undefined, "Can not access value directly: "+ninja1.sliceValue);
+
+				
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

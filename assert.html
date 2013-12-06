@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+
+				test("Asynchronous method 1", function () {
+					pause();
+					setTimeout (function(){
+									assert(true, "Passing first case");
+									assert(5===0, "5 equals to ZERO!!");
+									resume();
+								}, 1000);
+
+				});
+
+				test("Asynchronous method 2", function () {
+					pause();
+					setTimeout (function(){
+								//	assert(false, "Failing first case");
+									assert(0===0, "Zero equals to ZERO!!");
+									resume();
+								}, 1000);
+
+				});
+
+
+			}
+
+
+
+		</script>
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

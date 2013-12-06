@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memory</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://underscorejs.org/underscore.js"></script>
+  
+  <style>
+        
+    #Playfield {
+        height: 500px;
+        margin: 45px 0 0 400px;
+        width: 390px;
+    }
+
+    .card{
+        height: 50px;
+        width: 50px;
+        border: 2px solid black;
+        margin: 10px 2px 10px 2px;
+        padding:2px 2px 2px 2px;  
+        display: inline-block; 
+    }
+
+    card.one {
+        border-radius: 0px;
+    }
+    .card.two {
+        border-radius: 10px;
+    }
+    .card.three {
+        border-radius: 30px;
+    }
+    .card.four {
+        border-top-left-radius: 60px;
+    }
+    .card.five {
+        border-top-right-radius: 60px;
+    }
+    .card.six {
+        border-bottom-right-radius: 60px;
+    }
+    .card.seven {
+        border-bottom-left-radius: 60px;
+    }
+    .card.eight {
+        border-top-left-radius: 60px;
+        border-bottom-right-radius: 60px;
+    }
+    .card.nine {
+        border-top-right-radius: 60px;
+        border-bottom-left-radius: 60px;
+    }
+    .card.ten {
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+    }
+    .card.eleven {
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    .card.twelve {
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+
+    .down{
+        background-color: black;
+         border-radius: 0px !important;
+    }
+
+    .matched{
+        background-color: gray;
+    }
+
+
+  </style>
+
+  <script type="text/javascript">
+    $(function(){
+
+        var opened = [];
+        var count = 0;
+
+        var cards = $(".card");
+
+        cards = _.shuffle(cards);
+        
+        $("#Playfield").html("");
+
+        for (var i = 0; i < cards.length ; i++) {
+            $("#Playfield").append(cards[i]);
+        }
+
+
+        $('.card').click(function(){
+            $(this).toggleClass('down');
+            opened[count++] = this;
+
+            if(count > 1){
+                
+                var classListA = $(opened[0]).attr('class').split(/\s+/);
+                var classListB = $(opened[1]).attr('class').split(/\s+/);
+
+                if(classListA[1] === classListB[1]){
+                    $(opened[0]).addClass('matched');
+                    $(opened[1]).addClass('matched');
+                    opened = []; 
+                    count = 0;
+                }else{
+                   setTimeout(function(){
+                        $(opened[0]).toggleClass('down');
+                        $(opened[1]).toggleClass('down');
+                        opened = []; 
+                        count = 0;
+                    } , 1000);
+                }
+
+                 
+                
+            }
+
+        }); 
+
+
+
+
+    });
+    
+  </script>
+</head>
+<body>
+  <div id="Playfield">
+    <div class="card down one" data-face="1"></div>
+    <div class="card down two" data-face="2"></div>
+    <div class="card down three" data-face="3"></div>
+    <div class="card down four" data-face="4"></div>
+    <div class="card down five" data-face="5"></div>
+    <div class="card down six" data-face="6"></div>
+    <div class="card down seven" data-face="7"></div>
+    <div class="card down eight" data-face="8"></div>
+    <div class="card down nine" data-face="9"></div>
+    <div class="card down ten" data-face="10"></div>
+    <div class="card down eleven" data-face="11"></div>
+    <div class="card down twelve" data-face="12"></div>
+    <div class="card down one" data-face="1"></div>
+    <div class="card down two" data-face="2"></div>
+    <div class="card down three" data-face="3"></div>
+    <div class="card down four" data-face="4"></div>
+    <div class="card down five" data-face="5"></div>
+    <div class="card down six" data-face="6"></div>
+    <div class="card down seven" data-face="7"></div>
+    <div class="card down eight" data-face="8"></div>
+    <div class="card down nine" data-face="9"></div>
+    <div class="card down ten" data-face="10"></div>
+    <div class="card down eleven" data-face="11"></div>
+    <div class="card down twelve" data-face="12"></div>
+  </div>
+</body>
+</html>

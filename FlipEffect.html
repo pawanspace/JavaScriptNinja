@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Flip Effect HTML5, CSS3</title>
+		<style type="text/css">
+			.flip-div-1 {
+    background-color: #D00000;
+    margin: 0 0 0 480px;
+    position: fixed;
+    width: 15%;
+    display: inline-block;
+}
+			
+.flip-div-2 {
+    background-color: #DDDFFF;
+    height: 210px;
+    margin: 80px 0 0 480px;
+    position: static;
+    width: 15%;
+        display: inline-block;
+}
+
+.flip-div-3 {
+    background-color: #DDDFEE;
+    height: 210px;
+    margin: 0px 0 0 480px;
+    position: static;
+    width: 15%;
+    
+}
+
+.flip-div-4 {
+    background-color: #DDDFDD;
+    height: 210px;
+    margin: 0px 0 0 480px;
+    position: static;
+    width: 15%;
+}
+
+
+			.flip-div-1, .flip-div-2 .flip-div-3 .flip-div4 span{
+			    color: white;
+			    font-size: 30px;
+			}
+
+			
+			.flipping{
+				transition-property: transform;
+				transition-duration:3s;
+				transform: rotateX(180deg);
+				border: 1 solid;
+				z-index: 0;
+			}
+
+			.top{
+				z-index: 400;
+				position: relative;
+			}
+
+
+			header {
+			    background: url("bg.PNG") repeat scroll 0 0 #F9F8F6;
+			    height: 148px;
+			    width: 100%;
+			    position: fixed;
+				margin:0;
+			}
+
+			.nav li{
+				background-color: #ea5080;
+				list-style: none;
+				margin-right: 20px;
+ 				padding: 10px 10px 10px 10px;
+ 			    font-size: 15px;
+  				font-weight: bold;
+  				display:inline;
+  				border-radius: 180px;
+			}
+		
+			nav {
+			    position: fixed;
+			    width: 100%;
+			    z-index: 80;
+			    margin-top: 95px;
+			}
+
+			
+			.nav {
+			    position: absolute;
+			    width: 50%;
+			}
+
+						
+			.my-info {
+			    float: right;
+			    position: relative;
+			    width: 30% !important;
+			}
+
+			.nav li:hover{
+				background-color: #aa2a52;
+				color: #FFFFFF;
+			}
+
+		</style>
+
+		<script type="text/javascript">
+
+		window.onload = function()
+		{
+			var counter = 1;
+			function moveDiv(){
+				var flipper = document.querySelector(".flip-div-"+counter);
+				flipper.classList.add("flipping");
+				setTimeout(function(){document.querySelector(".flip-div-"+(counter+1)).classList.add("top")}, 1500);
+			}
+
+			document.getElementById("move").addEventListener("click", moveDiv);
+		}
+
+
+
+
+
+		</script>
+
+	</head>
+	<body>
+		<div class="flip-div-1">
+			<span>
+				This is just a text for displaying the flip effect using HTML5 and CSS3.
+			</span>
+		</div> 
+
+		<div class="flip-div-2 hidden">
+			<span>
+				Next div
+			</span>
+		</div> 
+		<div class="flip-div-3 hidden">
+			<span>
+				Next div
+			</span>
+		</div> 
+		<div class="flip-div-4 hidden">
+			<span>
+				Next div
+			</span>
+		</div> 
+
+		<button name="move" id="move">Move</button>
+
+		<!-- <div class="container">
+			<header>
+
+			</header>
+			<nav>
+				<ul class="nav">
+					<li>
+						Technical Articles
+					</li>
+					<li>
+						Methodologies
+					</li>
+					<li>
+						General
+					</li>
+				</ul>
+				<ul class="my-info nav">	
+					<li>
+						What I do!
+					</li>
+					<li>
+						Contact Me :)
+					</li>
+				</ul>
+			</nav>
+		</div> -->
+	</body>
+</html>

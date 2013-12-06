@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+	Event Test
+</title>
+
+</head>
+<body>
+<ul id="parent-list">
+	<li id="post-1">Item 1</li>
+	<li id="post-2">Item 2</li>
+	<li id="post-3">Item 3</li>
+	<li id="post-4">Item 4</li>
+	<li id="post-5">Item 5</li>
+	<li id="post-6">Item 6</li>
+</ul>
+<script type="text/javascript">
+	// Get the element, add a click listener...
+	document.getElementById("parent-list").attachEvent("onclick",function(e) {
+		alert(e.target.nodeName);
+		// e.target is the clicked element!
+		// If it was a list item
+		if(e.target && e.target.nodeName == "LI") {
+			// List item found!  Output the ID!
+			//console.log("List item ",e.target.id.replace("post-", "")," was clicked!");
+			alert("List item ",e.target.id.replace("post-", "")," was clicked!");
+		}
+	});
+</script>
+</body>
+</html>

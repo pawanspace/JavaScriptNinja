@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+
+				var ArgumentsObjectTheFakeArray = function (){
+
+					var propertyNames = Object.keys(arguments);
+
+					for(var i = 0; i < propertyNames.length; i++){
+						console.log(propertyNames[i]+" : "+arguments[propertyNames[i]]);
+					}
+
+
+					// Treats argument as an array
+					return Array.prototype.slice.call(arguments, 1);
+				}
+				
+				var multi = function(number){
+					return number * Math.max.apply(Math, Array.prototype.slice.call(arguments, 1));
+				}
+
+				assert(multi(3,1,2,3) === 9, "Fooled slice and max method by using apply with arguments object instead of a real array");
+				assert(Math.max.apply(Math, ArgumentsObjectTheFakeArray(1,2,3,{name: "pawan"})) === 3, "Found expected value");
+
+
+				assert(multi.length === 1,"Every function has a length property which gives you number of parameters it takes");
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+				
+				var getElement = function(elementId){
+						if(!getElement.cache) { getElement.cache = {} };
+						return getElement.cache[elementId] = getElement.cache[elementId] || document.getElementById(elementId);
+				};
+
+				var results = document.getElementById("results");
+
+				assert(getElement("results") == results, "Got element and added to cache");
+				assert(getElement.cache["results"] == results, "Got element from cache");
+
+				// Or returns one of the values, Java doesn't support it.
+				function testReturnType(){
+					return false || "value"
+				}
+			
+				assert(testReturnType() === "value" ,"Got value based on OR operation see code for more details");
+
+
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+#paint{
+	border: solid;
+	cursor: url(Pencil.cur), pointer;
+}
+
+#paint.mousedown{
+	cursor: url(Pencil.cur), pointer;
+}
+
+#paint:active{
+	cursor: url(Pencil.cur), pointer;
+}

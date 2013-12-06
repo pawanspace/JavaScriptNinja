@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing: Assert Functions Theory</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+				function nibble (){
+					return true;
+				}
+
+				assert(typeof nibble === 'function', "Nibble is a function!!");
+				assert(nibble.name === 'nibble', "Nibble has a name "+ nibble.name);
+
+				//annonymous function assigned to a variable
+				var canFly = function(){
+					return false;
+				}
+
+				assert(typeof canFly === 'function', "canFly is a function!!");
+				assert(canFly.name === '', "canFly has no name "+ canFly.name);
+
+				function outer(){
+					//This is cool!
+					assert(typeof inner === 'function' , "inner in scope before declation, This is cool!");
+					function inner(){
+						console.log("This is an inner function");
+					}
+				}
+
+				outer();
+				assert(typeof outer === 'function' , "outer is in global scope");
+				assert(this.inner === undefined , "inner not in global scope");
+			}
+
+
+
+		</script>
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

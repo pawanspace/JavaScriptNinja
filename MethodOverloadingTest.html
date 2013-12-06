@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Method Overloading Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" src="AddFunction.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+				var ninja = { values : ["Pawan", "Varun", "Prince"] };
+
+				addFunction(ninja, "overLoaded", function(){
+				 return this.values
+				});
+				
+				addFunction(ninja, "overLoaded", function(first){
+				  var retVal = [];  
+				  for(var i = 0; i<arguments.length; i++){
+				  	this.values[i] = first; 
+				  	retVal.push(this.values[i])  
+				  }
+				  return retVal;
+				});
+				
+				addFunction(ninja, "overLoaded", function(first, last){ 
+				 var retVal = [];  
+				 for(var i = 0; i<arguments.length; i++){
+				 	this.values[i] = first +" "+last; 
+				 	retVal.push(this.values[i])  
+				 }
+				 return retVal;
+				});
+
+
+				assert(ninja.overLoaded().length === 3, "Got expected value for no arguments");
+				assert(ninja.overLoaded("Pawan").length === 1, "Got expected value for 1 argument");
+				assert(ninja.overLoaded("Pawan", "chopra").length === 2, "Got expected value for 2 arguments");
+				assert(ninja.overLoaded("Pawan", "chopra", "test") === undefined, "Got undefined for 3 arguments");
+
+				
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

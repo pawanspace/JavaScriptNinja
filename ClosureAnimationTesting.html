@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<title>Closure animation testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+
+		<style type="text/css">
+			.pipe{
+				width: 100%;
+				height: 20px;
+				background-color: #BDBDBD;
+				margin-bottom: 50px;
+			}
+
+			.pipe-bottom{
+				width: 100%;
+				height: 20px;
+				background-color: #BDBDBD;
+				position: fixed;
+			}
+
+			body{
+				overflow-x: hidden;
+			}
+			#ball{
+				position: relative;
+			}
+		
+		</style>
+		<script type="text/javascript">
+
+		window.onload = function(){
+				var ball = document.getElementById("ball");
+				
+				var initialTop = ball.style.top;
+				var initialLeft = ball.style.left;
+				var top = true;
+				var left = 0;
+				var pos =  0; 
+
+				var timer = setInterval(function(){
+						left = left+30;
+						if(top){
+							pos += -2; 
+							if(pos === -62){
+								top = false;
+							}
+						}else{
+							pos += 2; 
+							if(pos === 20){
+								top = true;
+							}
+						}
+
+						ball.style.top = pos+"px" ;
+						ball.style.left = (left/10)+"px";
+						
+						if(ball.offsetLeft >= ball.offsetWidth){
+							reset();
+						}
+					
+				}, 30);
+
+				var reset = function(){
+					ball.style.top = initialTop;
+					ball.style.left = initialLeft;
+					pos  = 0;
+					left = 0;
+					top = true;
+				};
+		};
+
+		</script>
+		
+	</head>
+	<body>
+		<div class="pipe">&nbsp;</div>
+		
+		<div id="ball"><img src="soccer_ball.png"></div>
+		
+		<div class="pipe-bottom">&nbsp;</div>
+		<ul id="results"></ul>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="578" height="200"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      
+      context.beginPath();
+      context.moveTo(100, 85);
+      context.lineTo(119999, 1240);
+      context.lineWidth = 2;
+
+      // line color
+      context.strokeStyle = 'black';
+      context.stroke();
+   	  
+
+      for (var i = 0; i < 10; i++) {
+          if( i%2 == 0){
+             drawLowerWave();
+          }else{
+              drawUpperWave();
+          }
+
+      };
+
+
+      function drawUpperWave(){
+        context.beginPath();
+        context.moveTo(290, 85);
+        context.bezierCurveTo(290, 0, 400, 0, 400, 87);
+        context.lineWidth = 2;
+        // line color
+        context.strokeStyle = 'blue';
+        context.stroke();
+      }
+
+      function drawLowerWave(){
+        context.beginPath();
+        
+        context.moveTo(188, 85);
+        context.bezierCurveTo(170, 180, 300, 180, 290, 85);
+        //context.bezierCurveTo(-140, -30, -288, -40, -260, -130);
+        // context.bezierCurveTo(140, 30, 288, 40, 388, 170);
+        context.lineWidth = 2;
+
+        // line color
+        context.strokeStyle = 'blue';
+        context.stroke();
+     }
+    </script>
+  </body>
+</html>

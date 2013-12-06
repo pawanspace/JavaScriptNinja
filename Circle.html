@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+        background: linear-gradient(0deg, blue, green 40%, blue) no-repeat;
+      }
+
+      .water{
+        margin-top: 40px;
+        position: relative;
+        }
+
+      #myCanvas{
+        position: relative;
+      }
+    </style>
+
+    <script type="text/javascript">
+      
+    var imageRoller = function(ball){
+            var self ={};
+            var initialTop = ball.style.top;
+            var initialLeft = ball.style.left;
+            var top = true;
+            var left = 0;
+            var pos =  0; 
+
+            self.reset = function(){
+              ball.style.top = initialTop;
+              ball.style.left = initialLeft;
+              pos  = 0;
+              left = 0;
+              top = true;
+            };
+
+            self.timer = function(){
+             setInterval(function(){
+                left = left+30;
+                if(top){
+                  pos += -2; 
+                  if(pos === -62){
+                    top = false;
+                  }
+                }else{
+                  pos += 2; 
+                  if(pos === 20){
+                    top = true;
+                  }
+                }
+
+                ball.style.top = pos+"px" ;
+                ball.style.left = (left/10)+"px";
+                
+                if(ball.offsetLeft >= ball.parentNode.offsetWidth){
+                  self.reset();
+                }
+              
+            }, 30);
+           };
+
+           return self;
+
+    }
+
+
+
+      window.onload = function(){
+        var elements = document.getElementsByTagName("img");
+        for (var count =0 ; count <elements.length ; count++) {
+            var ball = elements[count];
+            ball.style.position = "relative";
+            var roller = new imageRoller(ball);
+            roller.timer();
+        } 
+    };
+
+    void(0);
+    </script>
+  </head>
+  <body>
+  <div class="water">
+  <img src="soccer_ball.png">
+  <img src="soccer_ball.png">
+  <img src="soccer_ball.png">
+</div>
+ 
+  </body>
+</html>

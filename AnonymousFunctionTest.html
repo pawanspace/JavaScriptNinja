@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+				var ninja = {
+					chirp : function(times){
+						return times >1 ? ninja.chirp(times-1)+ "-chirp": "chirp";
+					};
+				};
+
+				assert(ninja.chirp(3) === "chirp-chirp-chirp",  "Method is working recursively for ninja");
+
+
+				var samurai = {
+					chirp : ninja.chirp
+				};
+
+				assert(samurai.chirp(3) === "chirp-chirp-chirp",  "Method is working recursively for samurai as well");
+
+				ninja = {}; //empty ninja object
+
+				try{
+					// Try this now
+					samurai.chirp(3) 
+				}
+				catch(e){
+					//should get error
+					assert(false,  "Error: Method is undefined for samurai because ninja object is reffered in chirp method"+e.name + ": " + e.message);		
+				}			
+
+				//fixing above error
+
+				ninja = {
+					chirp : function(times){
+						//instead of ninja call this
+						return times >1 ? this.chirp(times-1)+ "-chirp": "chirp";
+					};
+				}; // Good to have semicolon here see reason below
+
+				/*
+					One thing that's important to remember is the semicolon after function(){} definitions.
+					It's a good practice to have semicolons at the end of all statements; especially so after
+					variable assignments. Doing so with anonymous functions is no exception. When
+					compressing code, having properly placed semicolons will allow for greater flexibility in
+					compression techniques.
+				*/
+
+
+
+
+				samurai = {
+					chirp : ninja.chirp
+				};
+	
+				ninja = {}//empty ninja object again
+
+
+				assert(samurai.chirp(3) === "chirp-chirp-chirp",  "Method is working recursively for samurai even if ninja does not have reference to chirp method");				
+
+
+				ninja = {
+					chirp : function(times){
+						//instead of ninja call this
+						return times >1 ? arguments.callee(times-1)+ "-chirp": "chirp";
+					}
+				};
+
+				samurai = {
+					chirp : ninja.chirp
+				};
+				assert(ninja.chirp(3) === "chirp-chirp-chirp",  "Method is working recursively for ninja using callee");
+		
+				assert(samurai.chirp(3) === "chirp-chirp-chirp",  "Method is working recursively for samurai using callee");				
+
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

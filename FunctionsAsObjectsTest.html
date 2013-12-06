@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+				
+				var FunctionStore = function(){
+						var self = {};
+						var nextId = 1, cache = {};
+						self.add = function(func){
+							if(!func.id){
+								func.id = nextId++;
+								cache[func.id] = func;
+								return !!cache[func.id];
+							}
+						};
+						return self;
+				};
+
+				var storeMe = function(){};
+				assert(FunctionStore().add(storeMe), "Added first time");
+				assert(FunctionStore().add(storeMe), "Added only once");
+
+	
+				var store = {
+			    	nextId: 1,
+         			cache: {},
+          			add: function(fn) {
+							if (!fn.id) { 
+								// You have to give either this or store otherwise it looks for these properties within the function.
+								fn.id = this.nextId++; 
+								return !!(this.cache[fn.id] = fn); 
+							} 
+						}
+				};
+	
+				function ninja(){}
+				assert(store.add(ninja), "Function was safely added."); 
+				assert(!store.add(ninja), "But it was only added once."); 
+
+
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>

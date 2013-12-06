@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<title>Javascript Unit Testing</title>
+		<SCRIPT TYPE="text/javascript" src="DummiesMindUnitTest.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" src="ForEach.js"></SCRIPT>
+		<link rel="stylesheet" type="text/css" href="Ninja.css">
+		<script type="text/javascript">
+
+			window.onload = function () {
+
+				function eat(){
+					return this;
+				}
+				
+				assert(eat() === window, "Function context is window");
+
+				var ninja = {
+					eating: eat
+				}
+
+				assert(ninja.eating() === ninja ," Ninja is eating!!")
+
+				var NinjaObject = function(){
+					this.eating = eat;
+				}
+
+				var firstNinja = new NinjaObject();
+				assert(firstNinja.eating() === firstNinja ,"First Ninja eating");
+
+				var secondNinja = new NinjaObject();
+				assert(secondNinja.eating() === secondNinja ,"Second Ninja eating");
+
+				var list = [2,3,4,5];
+
+				ForEach(list, function(index){	
+					console.log(this);
+					
+					assert(list[index] === this, "Got expected value "+list[index]+" But failing because putting === which is value comparison not object comparison");
+					// Not doing value comparison just doing object thats why its passing. Try putting === this will fail.
+					assert(list[index] == this, "Got expected value "+list[index]);
+				})
+
+
+				ForEach(list, function(index){	
+					console.log(this);
+					// Not doing value comparison just doing object thats why its passing. Try putting === this will fail.
+					assert(list[index] === this, "Got expected value "+list[index]+" But failing because putting === which is value comparison not object comparison");
+					assert(list[index] == this, "Got expected value "+list[index]);
+					if(index === 2){
+						assert(true, "Breaking after 3 elements should not print next elements");
+						return true;
+					}
+				})
+
+
+				ForEach([1], function(index, args){	
+					console.log(this);
+					assert(args["exists"] === true, "Received expected arbitrary arguments");
+				}, {exists: true})
+
+
+
+				var map = {
+					name: "Pawan",
+					city: "West Des Moines",
+					state: "iowa"
+				}
+
+
+				ForEach(map, function(index){	
+					console.log(this);
+					// Not doing value comparison just doing object thats why its passing. Try putting === this will fail.
+					assert(map[index] === this, "Got expected value from an object not list "+map[index]+" But failing because putting === which is value comparison not object comparison");
+					assert(map[index] == this, "Got expected value from an object not list"+map[index]);
+				})
+
+			}
+
+
+
+		</script>
+		
+	</head>
+	<body>
+		<ul id="results"></ul>
+	</body>
+</html>
